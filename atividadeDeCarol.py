@@ -6,6 +6,10 @@ nomes = ["dia","mês","ano","\n[1]AMRAP \n[2]EMOM \n[3]for time\n","o tempo/dura
 arquivo = 'valores.txt'
 contador = 0
 
+def teste():
+    with open (arquivo, 'r') as f:
+        return ast.literal_eval(f.read())
+
 def login(valores):
     global logado
     logado = 0
@@ -44,7 +48,7 @@ def treinoFormatado(cadastroOuLogin,valores):
             return
         print(valores[cadastrado])
         for i in range(len(valores[cadastrado])):
-            if i >= 1:
+            if i > 1:
                 print(f"{valores[cadastrado][i][0]}/{valores[cadastrado][i][1]}/{valores[cadastrado][i][2]}")#data
                 print("Tipo de treino:", end = " ")#tipo de treino
                 if valores[cadastrado][i][3] == 1:
@@ -96,8 +100,12 @@ if cadastroOuLogin == 1:
     registrando(listaDeCadastro, valores)
 elif cadastroOuLogin == 2:
     login(valores)
-valores = load(arquivo)
+valores = teste()
 while True:
+    valores = teste()
+    print(type(valores))
+    print(valores)
+    print(cadastrado)
     resposta = int(input("Digite \n[1]adicionar \n[2]visualizar \n[3]editar \n[4]exclui\n"))
     print()
     match resposta:

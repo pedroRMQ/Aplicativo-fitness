@@ -1,5 +1,3 @@
-import ast
-
 treinos = []
 listaDeCadastro = []
 nomes = ["dia","mês","ano","\n[1]AMRAP \n[2]EMOM \n[3]for time\n","o tempo/duração do treino em minutos"]
@@ -7,8 +5,8 @@ arquivo = 'valores.txt'
 contador = 0
 
 def teste():
-    with open (arquivo, 'r') as f:
-        return ast.literal_eval(f.read())
+    with open (arquivo, 'r+') as f:
+        return eval(f.read())
 
 def login(valores):
     global logado
@@ -89,7 +87,7 @@ def treinoFormatado(cadastroOuLogin,valores):
                 print()
 
 try:
-    valores = ast.literal_eval(load(arquivo))
+    valores = eval(load(arquivo))
     print(f"valores carregados: {valores}")
 except:
     print("Criando arquivo novo...")

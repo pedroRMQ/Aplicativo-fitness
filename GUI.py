@@ -83,9 +83,9 @@ def frame_home():
     home.geometry("800x600")
 
     Button(home,text="Adicionar", command=frame_adicionar).place(x=50,y=50)
-    Button(home,text="Visualizar").place(x=150,y=50)
-    Button(home,text="Editar").place(x=250,y=50)
-    Button(home,text="Excluir").place(x=350,y=50)
+    Button(home,text="Visualizar", command=frame_visualizar).place(x=150,y=50)
+    Button(home,text="Editar", command=frame_editar).place(x=250,y=50)
+    Button(home,text="Excluir",command=frame_excluir).place(x=350,y=50)
 
     cadastro.destroy()
     login.destroy()
@@ -156,6 +156,13 @@ def frame_editar():
     editar = Tk()
 
     editar.geometry("400x600")
+
+#cria frame de exlusão
+def frame_excluir():
+
+    excluir = Tk()
+
+    excluir.geometry("400x600")
 
 
 cadastro = Tk() #Cria um frame de cadastro para a variavel cadastro que vai ser apagado depois

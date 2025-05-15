@@ -6,7 +6,6 @@ treinos = []
 listaDeCadastro = []
 nomes = ["dia","mês","ano","\n[1]AMRAP \n[2]EMOM \n[3]for time\n","o tempo/duração do treino em minutos"]
 arquivo = 'valores.txt'
-contador = 0
 
 try:
     valores = eval(load(arquivo))

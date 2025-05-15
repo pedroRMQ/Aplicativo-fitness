@@ -1,5 +1,5 @@
 def treinoFormatado(valores,formatacao):
-        
+
         if len(valores[formatacao]) == 2:
             print("Nenhum treino cadastrado.\n")
         

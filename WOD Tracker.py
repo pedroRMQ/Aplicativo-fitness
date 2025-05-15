@@ -1,6 +1,5 @@
-
-from Route import treinoFormatado, load, cadastro, substituir, deletar
-from Login import login, registrando
+from Route import *
+from Login import *
 
 treinos = []
 listaDeCadastro = []

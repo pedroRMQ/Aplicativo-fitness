@@ -48,10 +48,11 @@ def substituir(valores,formatacao,nomes):
 
         valores[formatacao][resposta+1][i] = int(input(f"Digite {nomes[i]} você quer substituir: "))
 
-        for j in range(len(valores[resposta+1])):#movimentos do treino
+    for j in range(len(valores[formatacao][resposta+1])):#movimentos do treino
 
-            if j >=5:
-                valores[formatacao][resposta+1][j] = input("Digite por qual movimento você quer substituir: ")
+        if j >=5:
+            valores[formatacao][resposta+1][j] = input("Digite por qual movimento você quer substituir: ")
+            
     return valores
 
 def deletar(valores,formatacao):

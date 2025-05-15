@@ -1,7 +1,6 @@
 import GUI as g
 
-def login(valores, arquivo):
-    global usuario
+def login(valores):
 
     userName = input("Digite o nome do usuário: ")
     userPassword = input("Digite o nome do usuário: ")
@@ -11,12 +10,12 @@ def login(valores, arquivo):
             if valores[i][1] == userPassword:
                 print("entrou")
                 usuario = i
+                return usuario
             else:
                 print("senha incorreta")
 
 def registrando(listaDeCadastro, valores, arquivo):
-    global cadastrado
-
+    
     listaDeCadastro.append(input("Digite o nome do usuário: "))
     listaDeCadastro.append(input("Digite a senha do usuário: "))
 
@@ -25,3 +24,4 @@ def registrando(listaDeCadastro, valores, arquivo):
         f.write(str(valores))
 
     cadastrado = len(valores)-1
+    return cadastrado

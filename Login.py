@@ -1,19 +1,18 @@
-
+import GUI as g
 
 def login(valores, arquivo):
-    global logado
+    global usuario
 
-    with open(arquivo, 'r') as f:
-        userName = input("Digite o nome do usuário: ")
-        userPassword = input("Digite o nome do usuário: ")
+    userName = input("Digite o nome do usuário: ")
+    userPassword = input("Digite o nome do usuário: ")
         
-        for i in range(len(valores)):
-            if valores[i][0] == userName:
-                if valores[i][1] == userPassword:
-                    print("entrou")
-                    logado = i
-                else:
-                    print("senha incorreta")
+    for i in range(len(valores)):
+        if valores[i][0] == userName:
+            if valores[i][1] == userPassword:
+                print("entrou")
+                usuario = i
+            else:
+                print("senha incorreta")
 
 def registrando(listaDeCadastro, valores, arquivo):
     global cadastrado

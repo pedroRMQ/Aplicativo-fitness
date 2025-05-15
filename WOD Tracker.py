@@ -1,3 +1,4 @@
+
 from Route import treinoFormatado, load, cadastro
 from Login import login, registrando
 
@@ -6,7 +7,7 @@ listaDeCadastro = []
 nomes = ["dia","mês","ano","\n[1]AMRAP \n[2]EMOM \n[3]for time\n","o tempo/duração do treino em minutos"]
 arquivo = 'valores.txt'
 contador = 0
-logado = 0
+usuario = 0
 cadastrado = 0
 
 try:
@@ -44,7 +45,7 @@ while True:
                 cadastro(str(valores), arquivo)
 
             elif cadastroOuLogin == 2:
-                valores[logado].append(treinos)
+                valores[usuario].append(treinos)
                 cadastro(str(valores), arquivo)
 
             treinos.clear()
@@ -55,7 +56,7 @@ while True:
                 treinoFormatado(valores,cadastrado)
 
             elif cadastroOuLogin == 2:
-                treinoFormatado(valores, logado)
+                treinoFormatado(valores, usuario)
 
         case 3:#edita o treino escolhido
             if cadastroOuLogin == 1:
@@ -64,9 +65,9 @@ while True:
                 treinoFormatado(valores,cadastrado)
 
             elif cadastroOuLogin == 2:
-                if len(valores[logado]) == 2:
+                if len(valores[usuario]) == 2:
                     continue
-                treinoFormatado(valores, logado)
+                treinoFormatado(valores, usuario)
 
             resposta = int(input("Qual treino você quer mudar(considere o treino no topo o treino 1): "))
             if cadastroOuLogin == 1:

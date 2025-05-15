@@ -1,12 +1,13 @@
 
-from Route import treinoFormatado, load, cadastro, substituir, deletar
-from Login import login, registrando
+from Route import *
+from Login import *
 
 treinos = []
 listaDeCadastro = []
 nomes = ["dia","mês","ano","\n[1]AMRAP \n[2]EMOM \n[3]for time\n","o tempo/duração do treino em minutos"]
 arquivo = 'valores.txt'
-contador = 0
+usuario = 0
+cadastrado = 0
 
 try:
     valores = eval(load(arquivo))
@@ -17,14 +18,12 @@ except:
 
 cadastroOuLogin = int(input("Você deseja se cadastrar[1] ou fazer o login[2]\n"))
 if cadastroOuLogin == 1:
-    cadastrado = registrando(listaDeCadastro, valores, arquivo)
+    registrando(listaDeCadastro, valores, arquivo)
 elif cadastroOuLogin == 2:
-    usuario = login(valores)
+    login(valores)
 
 while True:
-
     valores = eval(load(arquivo))
-    
     resposta = int(input("Digite \n[1]adicionar \n[2]visualizar \n[3]editar \n[4]exclui\n"))
     match resposta:
         case 1:
@@ -60,32 +59,36 @@ while True:
 
         case 3:#edita o treino escolhido
             if cadastroOuLogin == 1:
+                if len(valores[cadastrado]) == 2:
+                    continue
                 treinoFormatado(valores,cadastrado)
 
-                valores = substituir(valores,cadastrado,nomes)
-
-                cadastro(str(valores), arquivo)
-
             elif cadastroOuLogin == 2:
+                if len(valores[usuario]) == 2:
+                    continue
                 treinoFormatado(valores, usuario)
 
-                valores = substituir(valores,usuario,nomes)
-
-                cadastro(str(valores), arquivo)
-
-        case 4:#deleta o treino
+            resposta = int(input("Qual treino você quer mudar(considere o treino no topo o treino 1): "))
             if cadastroOuLogin == 1:
 
-                treinoFormatado(valores,cadastrado)
+                for i in range(len(valores[cadastrado])):
+                    if valores[cadastrado] == 3:
+                        treinos[resposta-1][3] = int(input("Qual tipo de treino você quer substituir \n[1]AMRAP \n[2]EMOM \n[3]for time\n"))
+                        continue
 
-                valores = deletar(valores,cadastrado)
+                    treinos[resposta-1][i] = int(input(f"Qual {nomes[i]} você quer substituir: "))
 
-                cadastro(str(valores), arquivo)
-            
-            elif cadastroOuLogin == 2:
+                for j in range(len(treinos[resposta-1])):#movimentos do treino
+                    if j >=5:
+                        treinos[resposta-1][j] = input("Por qual movimento você quer substituir ")
 
-                treinoFormatado(valores,usuario)
+        case 4:#deleta o treino
 
-                valores = deletar(valores,usuario)
+            treinoFormatado(len(treinos),treinos)
+            if not treinos:
+                continue
 
-                cadastro(str(valores), arquivo)
+            resposta = int(input("Qual treino você quer deletar(considere o treino no topo o treino 1): "))
+            treinos.pop(resposta - 1)
+            print('Treino deletado\n ')
+            contador -= 1

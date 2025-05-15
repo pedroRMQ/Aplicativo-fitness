@@ -34,3 +34,21 @@ def load(arquivo):
 def cadastro(valorInputado, arquivo):
     with open(arquivo, 'w') as f:
         f.write(valorInputado)
+
+def substituir(valores,formatacao,nomes):
+    resposta = int(input("Qual treino você quer mudar(considere o treino no topo o treino 1): "))
+
+    for i in range(5):
+
+        if valores[formatacao][resposta+1][i] == 3:
+
+            valores[formatacao][resposta+1][3] = int(input("Qual tipo de treino você quer substituir \n[1]AMRAP \n[2]EMOM \n[3]for time\n"))
+            continue
+
+        valores[formatacao][resposta+1][i] = int(input(f"Qual {nomes[i]} você quer substituir: "))
+
+        for j in range(len(valores[resposta+1])):#movimentos do treino
+
+            if j >=5:
+                valores[formatacao][resposta+1][j] = input("Por qual movimento você quer substituir ")
+    return valores

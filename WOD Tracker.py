@@ -1,5 +1,5 @@
 
-from Route import treinoFormatado, load, cadastro
+from Route import treinoFormatado, load, cadastro, substituir
 from Login import login, registrando
 
 treinos = []
@@ -19,10 +19,12 @@ cadastroOuLogin = int(input("Você deseja se cadastrar[1] ou fazer o login[2]\n"
 if cadastroOuLogin == 1:
     cadastrado = registrando(listaDeCadastro, valores, arquivo)
 elif cadastroOuLogin == 2:
-    usuario = login(valores, arquivo)
+    usuario = login(valores)
 
 while True:
+
     valores = eval(load(arquivo))
+    
     resposta = int(input("Digite \n[1]adicionar \n[2]visualizar \n[3]editar \n[4]exclui\n"))
     match resposta:
         case 1:
@@ -60,24 +62,16 @@ while True:
             if cadastroOuLogin == 1:
                 treinoFormatado(valores,cadastrado)
 
-                resposta = int(input("Qual treino você quer mudar(considere o treino no topo o treino 1): "))
+                valores = substituir(valores,cadastrado,nomes)
 
-                for i in range(len(valores[cadastrado][resposta+1])):
-
-                    if valores[cadastrado][resposta+1] == 3:
-
-                        valores[cadastrado][resposta+1][3] = int(input("Qual tipo de treino você quer substituir \n[1]AMRAP \n[2]EMOM \n[3]for time\n"))
-                        continue
-
-                    valores[cadastrado][resposta+1][i] = int(input(f"Qual {nomes[i]} você quer substituir: "))
-
-                for j in range(len(valores[resposta+1])):#movimentos do treino
-                    if j >=5:
-                        valores[cadastrado][resposta+1][j] = input("Por qual movimento você quer substituir ")
+                cadastro(str(valores), arquivo)
 
             elif cadastroOuLogin == 2:
                 treinoFormatado(valores, usuario)
-                resposta = int(input("Qual treino você quer mudar(considere o treino no topo o treino 1): "))
+
+                valores = substituir(valores,usuario,nomes)
+
+                cadastro(str(valores), arquivo)
 
         case 4:#deleta o treino
 

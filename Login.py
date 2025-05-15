@@ -1,4 +1,3 @@
-import GUI as g
 
 def login(valores):
 

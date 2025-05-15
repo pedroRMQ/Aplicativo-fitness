@@ -1,6 +1,5 @@
-
-
 def treinoFormatado(valores,formatacao):
+        
         if len(valores[formatacao]) == 2:
             print("Nenhum treino cadastrado.\n")
         
@@ -27,11 +26,13 @@ def treinoFormatado(valores,formatacao):
                 print()
 
 def load(arquivo):
+
     with open(arquivo, 'r') as f:
         read = f.read()
     return read
 
 def cadastro(valorInputado, arquivo):
+
     with open(arquivo, 'w') as f:
         f.write(valorInputado)
 
@@ -42,13 +43,21 @@ def substituir(valores,formatacao,nomes):
 
         if valores[formatacao][resposta+1][i] == 3:
 
-            valores[formatacao][resposta+1][3] = int(input("Qual tipo de treino você quer substituir \n[1]AMRAP \n[2]EMOM \n[3]for time\n"))
+            valores[formatacao][resposta+1][3] = int(input("Digite por qual tipo de treino você quer substituir \n[1]AMRAP \n[2]EMOM \n[3]for time\n"))
             continue
 
-        valores[formatacao][resposta+1][i] = int(input(f"Qual {nomes[i]} você quer substituir: "))
+        valores[formatacao][resposta+1][i] = int(input(f"Digite {nomes[i]} você quer substituir: "))
 
         for j in range(len(valores[resposta+1])):#movimentos do treino
 
             if j >=5:
-                valores[formatacao][resposta+1][j] = input("Por qual movimento você quer substituir ")
+                valores[formatacao][resposta+1][j] = input("Digite por qual movimento você quer substituir: ")
+    return valores
+
+def deletar(valores,formatacao):
+
+    resposta = int(input("Qual treino você quer deletar(considere o treino no topo o treino 1): "))
+
+    valores[formatacao].pop(resposta+1)
+
     return valores

@@ -1,5 +1,5 @@
 
-from Route import treinoFormatado, load, cadastro, substituir
+from Route import treinoFormatado, load, cadastro, substituir, deletar
 from Login import login, registrando
 
 treinos = []
@@ -74,12 +74,18 @@ while True:
                 cadastro(str(valores), arquivo)
 
         case 4:#deleta o treino
+            if cadastroOuLogin == 1:
 
-            treinoFormatado(len(treinos),treinos)
-            if not treinos:
-                continue
+                treinoFormatado(valores,cadastrado)
 
-            resposta = int(input("Qual treino você quer deletar(considere o treino no topo o treino 1): "))
-            treinos.pop(resposta - 1)
-            print('Treino deletado\n ')
-            contador -= 1
+                valores = deletar(valores,cadastrado)
+
+                cadastro(str(valores), arquivo)
+            
+            elif cadastroOuLogin == 2:
+
+                treinoFormatado(valores,usuario)
+
+                valores = deletar(valores,usuario)
+
+                cadastro(str(valores), arquivo)

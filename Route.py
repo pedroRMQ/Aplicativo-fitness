@@ -25,7 +25,7 @@ def substituir(nome,treino):
 
             linha =  ";".join(dados) + "\n"
 
-        linhas_novas.append(linha)
+            linhas_novas.append(linha)
     
     with open("valores.txt", "w") as f:
         f.writelines(linhas_novas)

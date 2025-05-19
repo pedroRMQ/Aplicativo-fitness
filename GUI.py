@@ -174,7 +174,7 @@ def set(choose):
             var.set("for time")
 
 def adicao_movimentos():
-    movimento = ""
+    global movimento
 
     try:
         movimento =  movimento + "," + entry_movimento.get()
@@ -347,7 +347,7 @@ def editando(treino_editado):
              
             linha =  ";".join(dados) + "\n"
 
-        linhas_novas.append(linha)
+            linhas_novas.append(linha)
 
     with open("valores.txt", "w") as f:
         f.writelines(linhas_novas)
@@ -356,7 +356,7 @@ def editando(treino_editado):
     visualizar.destroy()
     frame_visualizar()
     
-#cria frame de exlusão
+#exclui
 def excluir(i):
 
     linhas_novas = []
@@ -379,11 +379,10 @@ def excluir(i):
     visualizar.destroy()
     frame_visualizar()
 
-
-
 with open("valores.txt", "a") as f:
     pass
 
+movimento = ""
 tela_cadastro = Tk() #Cria um frame de cadastro para a variavel cadastro que vai ser apagado depois
 
 frame_login() #Executa a função da tela de login

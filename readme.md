@@ -20,3 +20,4 @@ Nosso projeto é um aplicativo de CrossFit com uma interface gráfica intuitiva,
 - Vitor Carvalho de Sá
 - Pedro da Rocha Marques
 - Caio Leon Almeida Andrade Michalewicz
+- Natan Machado Santiago Tavares

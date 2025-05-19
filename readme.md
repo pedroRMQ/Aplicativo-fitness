@@ -4,11 +4,11 @@ Nosso projeto é um aplicativo de CrossFit com uma interface gráfica intuitiva,
 
 # Funcionalidades
 
-Sistema de cadastro
-Sistema de Login
-Registrar treinos
-Editar treinos
-Apagar treinos
+- Sistema de cadastro
+- Sistema de Login
+- Registrar treinos
+- Editar treinos
+- Apagar treinos
 
 # Tecnologias Utilizadas
 

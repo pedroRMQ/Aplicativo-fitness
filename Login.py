@@ -1,26 +1,27 @@
 
-def login(valores):
+def verificar_login(nome,senha):
 
-    userName = input("Digite o nome do usuário: ")
-    userPassword = input("Digite o nome do usuário: ")
-        
-    for i in range(len(valores)):
-        if valores[i][0] == userName:
-            if valores[i][1] == userPassword:
-                print("entrou")
-                usuario = i
-                return usuario
-            else:
-                print("senha incorreta")
+    with open("valores.txt", "r")  as f:
 
-def registrando(listaDeCadastro, valores, arquivo):
-    
-    listaDeCadastro.append(input("Digite o nome do usuário: "))
-    listaDeCadastro.append(input("Digite a senha do usuário: "))
+        for linha in f:
+            dados = linha.strip().split(";")
 
-    valores.append(listaDeCadastro)
-    with open(arquivo, 'w') as f:
-        f.write(str(valores))
+            if dados[0] == nome and dados[1] == senha:
+                return True
+            
+    return False
 
-    cadastrado = len(valores)-1
-    return cadastrado
+def cadastrar_usuario(nome,senha):
+  
+    with open("valores.txt", "a") as f:
+        f.write(f"{nome};{senha}\n")
+
+def usuario_existe(nome):
+    with open("valores.txt", "r") as f:
+        for linha in f:
+            dados = linha.strip().split(";")
+
+            if nome == dados[0]:
+                return True
+            
+    return False

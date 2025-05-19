@@ -1,58 +1,38 @@
-def treinoFormatado(valores,formatacao):
-        
-        if len(valores[formatacao]) == 2:
-            print("Nenhum treino cadastrado.\n")
-        
-        for i in range(len(valores[formatacao])):
-            if i > 1:
-                print(f"{valores[formatacao][i][0]}/{valores[formatacao][i][1]}/{valores[formatacao][i][2]}")#data
-                print("Tipo de treino:", end = " ")#tipo de treino
 
-                if valores[formatacao][i][3] == 1:
-                    print("AMRAP")
+def treinos_usuario(nome):
+    
+    treinos = []
 
-                elif valores[formatacao][i][3] == 2:
-                    print("EMOM")
+    with open("valores.txt", "r") as f:
 
-                elif valores[formatacao][i][3] == 3:
-                    print("for time")
+        for linha in f:
+            dados = linha.strip().split(";")
 
-                else:
-                    print("resposta inválida")
-                print(f"tempo: {valores[formatacao][i][4]}\nMovimentos:")# duração do treino
-                for j in range(len(valores[formatacao][i])):#movimentos do treino
-                    if j >=5:
-                        print(valores[formatacao][i][j])
-                print()
+            if dados[0] == nome:
+                for i in range(len(dados)-2):
+                    treinos.append(dados[i+2])
+    return treinos
 
-def load(arquivo):
+def substituir(nome,treino):
 
-    with open(arquivo, 'r') as f:
-        read = f.read()
-    return read
+    linhas_novas = []
 
-def cadastro(valorInputado, arquivo):
+    with open("valores.txt", "r") as f:
+        for linha in f:
+            dados = linha.strip().split(";")
 
-    with open(arquivo, 'w') as f:
-        f.write(valorInputado)
+            if dados[0] == nome:
+                dados.append(treino)
 
-def substituir(valores,formatacao,nomes):
-    resposta = int(input("Qual treino você quer mudar(considere o treino no topo o treino 1): "))
+            linha =  ";".join(dados) + "\n"
 
-    for i in range(5):
+        linhas_novas.append(linha)
+    
+    with open("valores.txt", "w") as f:
+        f.writelines(linhas_novas)
 
-        if valores[formatacao][resposta+1][i] == 3:
 
-            valores[formatacao][resposta+1][3] = int(input("Digite por qual tipo de treino você quer substituir \n[1]AMRAP \n[2]EMOM \n[3]for time\n"))
-            continue
 
-        valores[formatacao][resposta+1][i] = int(input(f"Digite {nomes[i]} você quer substituir: "))
-
-        for j in range(len(valores[resposta+1])):#movimentos do treino
-
-            if j >=5:
-                valores[formatacao][resposta+1][j] = input("Digite por qual movimento você quer substituir: ")
-    return valores
 
 def deletar(valores,formatacao):
 

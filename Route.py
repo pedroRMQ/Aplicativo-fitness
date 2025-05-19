@@ -1,4 +1,3 @@
-
 def treinos_usuario(nome):
     
     treinos = []
@@ -30,14 +29,3 @@ def substituir(nome,treino):
     
     with open("valores.txt", "w") as f:
         f.writelines(linhas_novas)
-
-
-
-
-def deletar(valores,formatacao):
-
-    resposta = int(input("Qual treino você quer deletar(considere o treino no topo o treino 1): "))
-
-    valores[formatacao].pop(resposta+1)
-
-    return valores

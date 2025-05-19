@@ -174,7 +174,7 @@ def set(choose):
             var.set("for time")
 
 def adicao_movimentos():
-    global movimento 
+    movimento = ""
 
     try:
         movimento =  movimento + "," + entry_movimento.get()
@@ -384,7 +384,6 @@ def excluir(i):
 with open("valores.txt", "a") as f:
     pass
 
-movimento = ""
 tela_cadastro = Tk() #Cria um frame de cadastro para a variavel cadastro que vai ser apagado depois
 
 frame_login() #Executa a função da tela de login

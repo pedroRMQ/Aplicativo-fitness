@@ -82,7 +82,7 @@ def inputs_cadastro():
 
 # Tela principal depois do login
 def frame_home():
-    global home
+    global home, var1,var2,var3
 
     home = Tk()
     home.geometry("800x600")
@@ -92,35 +92,86 @@ def frame_home():
     Button(home, text="Adicionar", command=frame_adicionar).place(x=50, y=50)
     Button(home, text="Visualizar", command=frame_visualizar).place(x=150, y=50)
 
+    var1 = StringVar()
+    var2 = StringVar()
+    var3 = StringVar()
+
+    # Tipos de treino
+    Checkbutton(home, text="AMRAP", variable=var1, onvalue="AMRAP", offvalue="").place(x=80, y=80)
+    Checkbutton(home, text="EMOM", variable=var2, onvalue="EMOM",offvalue="").place(x=150, y=80)
+    Checkbutton(home, text="for time", variable=var3, onvalue="for time",offvalue="").place(x=200, y=80)
+
     tela_login.destroy()
     tela_cadastro.destroy()
     home.mainloop()
 
 # Tela para adicionar novo treino
 def frame_adicionar():
-    global entry_dia, entry_mes, entry_ano, var, entry_movimento, entry_tempo, adicionar
+    global entry_dia, entry_mes, entry_ano, var, entry_movimento, entry_tempo,entry_metas, adicionar
 
     adicionar = Tk()
     adicionar.title("adicionar")
-    adicionar.geometry("500x500")
+    adicionar.geometry("500x600")
 
-    # Entradas de data, tipo de treino e tempo
+    # Entradas de data, tipo de treino,metas e tempo
     entry_dia = Entry(adicionar, width=3); entry_dia.place(x=180, y=30)
     entry_mes = Entry(adicionar, width=3); entry_mes.place(x=210, y=30)
     entry_ano = Entry(adicionar, width=5); entry_ano.place(x=240, y=30)
 
+    Label(adicionar, text="data: ").place(x=145, y=30)
+
     var = StringVar(); var.set("AMRAP")
 
     # Tipos de treino
-    Radiobutton(adicionar, text="AMRAP", variable=var, value="teste1", command=lambda: set(1)).place(x=80, y=80)
-    Radiobutton(adicionar, text="EMOM", variable=var, value="teste2", command=lambda: set(2)).place(x=150, y=80)
-    Radiobutton(adicionar, text="for time", variable=var, value="teste3", command=lambda: set(3)).place(x=200, y=80)
+    Radiobutton(adicionar, text="AMRAP", variable=var, value="teste1", command=lambda: set(1)).place(x=145, y=80)
+    Radiobutton(adicionar, text="EMOM", variable=var, value="teste2", command=lambda: set(2)).place(x=210, y=80)
+    Radiobutton(adicionar, text="for time", variable=var, value="teste3", command=lambda: set(3)).place(x=270, y=80)
+    
+    Label(adicionar, text="Tipo de treino: ").place(x=65,y=82)
 
-    entry_tempo = Entry(adicionar); entry_tempo.place(x=150, y=200)
-    entry_movimento = Entry(adicionar); entry_movimento.place(x=150, y=250)
+    entry_metas = Entry(adicionar); entry_metas.place(x=150, y=120)
+    entry_tempo = Entry(adicionar); entry_tempo.place(x=150, y=170)
+    entry_movimento = Entry(adicionar); entry_movimento.place(x=150, y=220)
 
-    Button(adicionar, text="adicionar movimento", command=adicao_movimentos).place(x=350, y=245)
-    Button(adicionar, text="Concluir", command=input_adicionar).place(x=200, y=300)
+    Label(adicionar, text="Meta: ").place(x=110,y=120)
+    Label(adicionar, text="Tempo: ").place(x=100,y=170)
+    Label(adicionar, text="Movimentos: ").place(x=70,y=220)
+
+    treino = treinos_usuario(nome)
+    if len(treino) == 1:
+        Label(adicionar, text="Sugestão de treino: ").place(x=80,y=300)
+        Label(adicionar, text="Tipo: AMRAP ").place(x=110,y=330)
+        Label(adicionar, text="Tempo: 10 minutos ").place(x=110,y=360)
+        Label(adicionar, text="Movimentos: ").place(x=110,y=390)
+        Label(adicionar, text="10 burpees").place(x=150,y=420)
+        Label(adicionar, text="20 air squats").place(x=150,y=450)
+        Label(adicionar, text="15 sit-ups").place(x=150,y=480)
+    elif len(treino) == 2:
+        Label(adicionar, text="Sugestão de treino: ").place(x=80,y=300)
+        Label(adicionar, text="Tipo: EMOM ").place(x=110,y=330)
+        Label(adicionar, text="Tempo: 12 minutos ").place(x=110,y=360)
+        Label(adicionar, text="Movimentos: Repetir").place(x=110,y=390)
+        Label(adicionar, text="10 push-ups").place(x=150,y=420)
+        Label(adicionar, text="12 kettlebell swings").place(x=150,y=450)
+        Label(adicionar, text="15 jumping jacks").place(x=150,y=480)
+    elif len(treino) == 3:
+        Label(adicionar, text="Sugestão de treino: ").place(x=80,y=300)
+        Label(adicionar, text="Tipo: AMRAP ").place(x=110,y=330)
+        Label(adicionar, text="Tempo: 10 minutos ").place(x=110,y=360)
+        Label(adicionar, text="Movimentos: ").place(x=110,y=390)
+        Label(adicionar, text="10 burpees").place(x=150,y=420)
+        Label(adicionar, text="20 air squats").place(x=150,y=450)
+        Label(adicionar, text="15 sit-ups").place(x=150,y=480)
+    elif len(treino) > 3:
+        Label(adicionar, text="Sugestão de treino: ").place(x=80,y=300)
+        Label(adicionar, text="Tipo: For time: ").place(x=110,y=330)
+        Label(adicionar, text="Tempo: O mais rapido possivel ").place(x=110,y=360)
+        Label(adicionar, text="Movimentos: 21-15-9 reps de: ").place(x=110,y=390)
+        Label(adicionar, text="Pull-ups").place(x=150,y=420)
+        Label(adicionar, text="Thrusters").place(x=150,y=450)
+
+    Button(adicionar, text="adicionar movimento", command=adicao_movimentos).place(x=350, y=215)
+    Button(adicionar, text="Concluir", command=input_adicionar).place(x=200, y=270)
 
 # Define tipo de treino
 def set(choose):
@@ -146,8 +197,10 @@ def input_adicionar():
     data = entry_dia.get() + "/" + entry_mes.get() + "/" + entry_ano.get()
     pratica = var.get()
     tempo = entry_tempo.get()
+    metas = entry_metas.get()
     movimento = adicao_movimentos()
-    treino = data + "," + pratica + "," + tempo + movimento
+    treino = data + "," + pratica + "," + tempo + "," +metas + movimento
+
     movimento = ""
     substituir(nome, treino)
     adicionar.destroy()
@@ -173,46 +226,62 @@ def frame_visualizar():
 
     treinos = treinos_usuario(nome)
 
+    filtro = [var1.get(),var2.get(),var3.get()]
+
     for i, treino in enumerate(treinos):
+        print(var1.get(),var2.get(),var3.get())
         info = treino.split(",")
         if info == ['']: break
 
-        Label(scroll_frame, text=f"Treino {i+1}º:", font=("Arial", 10)).pack(pady=20)
+        if info[1] not in filtro:
+            continue
+        
+        Label(scroll_frame, text=f"Treino {i+1}: ", font=("Arial", 10)).pack(pady=20)
         Label(scroll_frame, text=f"Data: {info[0]}").pack()
         Label(scroll_frame, text=f"Tipo: {info[1]}").pack()
         Label(scroll_frame, text=f"Tempo: {info[2]}").pack()
-        Label(scroll_frame, text=f"Movimentos: {','.join(info[3:])}").pack()
+        Label(scroll_frame, text=f"Metas: {info[3]}").pack()
+        Label(scroll_frame, text=f"Movimentos: {','.join(info[4:])}").pack()
 
         Button(scroll_frame, text="editar", command=lambda i=i: frame_editar(i)).pack()
         Button(scroll_frame, text="excluir", command=lambda i=i: excluir(i)).pack()
 
 # Tela de edição de treino
 def frame_editar(treino_editado):
-    global entry_dia_editando, entry_mes_editando, entry_ano_editando, entry_tempo_editando, entry_movimento_editando, editar, var_editando
+    global entry_dia_editando, entry_mes_editando, entry_ano_editando, entry_tempo_editando, entry_meta_editando, entry_movimento_editando, editar, var_editando
 
     treinos = treinos_usuario(nome)
     info = treinos[treino_editado].split(",")
     data_lista = info[0].split("/")
 
     editar = Tk()
-    editar.geometry("400x600")
+    editar.geometry("500x500")
     editar.title("editando")
 
     entry_dia_editando = Entry(editar, width=3); entry_dia_editando.place(x=180, y=30); entry_dia_editando.insert(0, data_lista[0])
     entry_mes_editando = Entry(editar, width=3); entry_mes_editando.place(x=210, y=30); entry_mes_editando.insert(0, data_lista[1])
     entry_ano_editando = Entry(editar, width=5); entry_ano_editando.place(x=240, y=30); entry_ano_editando.insert(0, data_lista[2])
 
+    Label(editar, text="data: ").place(x=145, y=30)
+
     var_editando = StringVar(); var_editando.set("AMRAP")
 
-    Radiobutton(editar, text="AMRAP", variable=var_editando, value="teste1", command=lambda: set_editando(1)).place(x=80, y=80)
-    Radiobutton(editar, text="EMOM", variable=var_editando, value="teste2", command=lambda: set_editando(2)).place(x=150, y=80)
-    Radiobutton(editar, text="for time", variable=var_editando, value="teste3", command=lambda: set_editando(3)).place(x=200, y=80)
+    Radiobutton(editar, text="AMRAP", variable=var_editando, value="teste1", command=lambda: set_editando(1)).place(x=145, y=80)
+    Radiobutton(editar, text="EMOM", variable=var_editando, value="teste2", command=lambda: set_editando(2)).place(x=210, y=80)
+    Radiobutton(editar, text="for time", variable=var_editando, value="teste3", command=lambda: set_editando(3)).place(x=270, y=80)
 
-    entry_tempo_editando = Entry(editar); entry_tempo_editando.place(x=150, y=200); entry_tempo_editando.insert(0, info[2])
-    entry_movimento_editando = Entry(editar); entry_movimento_editando.place(x=150, y=250)
+    Label(editar, text="Tipo de treino: ").place(x=65,y=82)
 
-    Button(editar, text="editar movimento", command=adicao_movimentos).place(x=350, y=245)
-    Button(editar, text="editar", command=lambda: editando(treino_editado)).place(x=200, y=300)
+    entry_meta_editando = Entry(editar); entry_meta_editando.place(x=150,y=120)
+    entry_tempo_editando = Entry(editar); entry_tempo_editando.place(x=150, y=170); entry_tempo_editando.insert(0, info[2])
+    entry_movimento_editando = Entry(editar); entry_movimento_editando.place(x=150, y=220)
+
+    Label(editar, text="Meta: ").place(x=110,y=120)
+    Label(editar, text="Tempo: ").place(x=100,y=170)
+    Label(editar, text="Movimentos: ").place(x=70,y=220)
+
+    Button(editar, text="editar movimento", command=adicao_movimentos).place(x=350, y=215)
+    Button(editar, text="editar", command=lambda: editando(treino_editado)).place(x=200, y=270)
 
 def set_editando(choose):
     match choose:
@@ -226,8 +295,9 @@ def editando(treino_editado):
     data = entry_dia_editando.get() + "/" + entry_mes_editando.get() + "/" + entry_ano_editando.get()
     pratica = var_editando.get()
     tempo = entry_tempo_editando.get()
+    meta = entry_meta_editando.get()
     movimento = adicao_movimentos()
-    treino = data + "," + pratica + "," + tempo + movimento
+    treino = data + "," + pratica + "," + tempo + "," + meta +movimento
     movimento = ""
 
     linhas_novas = []
